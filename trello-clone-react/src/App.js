@@ -1,25 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
+import Board from './components/Board';
+/* <img src={`${process.env.PUBLIC_URL}/images/Capture001.png`} alt="Background" /> */
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <br></br>
-        <img src={`${process.env.PUBLIC_URL}/images/Capture001.png`} alt="Background" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Trello Board</h1>
+      <br></br>
+      <Board></Board>
     </div>
   );
 }
