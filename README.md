@@ -20,3 +20,4 @@ These features allow for a thorough comparison of React and Angular in handling 
 Packages:
 React virsion 18 ( could have used 19 but it is in pre release and some dependencies were not able to install on it)
 npm install @dnd-kit/core  (dnd-kit for drag and drop functionality in react and next)  
+npm install @dnd-kit/sortable (sorting top - bottom)
