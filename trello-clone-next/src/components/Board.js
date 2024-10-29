@@ -6,9 +6,9 @@ import { DndContext } from "@dnd-kit/core"; // Import DndContext from @dnd-kit/c
 
 export default function Board() {
   const [lists, setLists] = useState([
-    { id: "1", title: "To Do", cards: [{ id: "1", text: "Task 1" }] },
-    { id: "2", title: "In Progress", cards: [{ id: "2", text: "Task 2" }] },
-    { id: "3", title: "Done", cards: [{ id: "3", text: "Task 3" }] },
+    { id: "1", title: "To Do", cards: [] },
+    { id: "2", title: "In Progress", cards: [] },
+    { id: "3", title: "Done", cards: [] },
   ]);
 
   const handleDragEnd = (event) => {
@@ -48,7 +48,6 @@ export default function Board() {
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <div className="board">
-        <h2>My Board</h2>
         <div className="list-container">
           {lists.map((list) => (
             <List
