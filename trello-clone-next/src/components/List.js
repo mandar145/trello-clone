@@ -1,23 +1,39 @@
-"use client";
-
-import React from 'react';
-import { useDroppable } from '@dnd-kit/core';
+import React, { useState } from 'react';
 import DraggableCard from './DraggableCard';
+import { useDroppable } from '@dnd-kit/core';
 
 export default function List({ title, listId, cards }) {
-    const { setNodeRef: setDroppableRef } = useDroppable({
-        id: listId,
-        data: { listId }, // Ensures listId is accessible in drag events
-    });
+  const [newCardText, setNewCardText] = useState('');
+  
+  // Set up the droppable area using useDroppable
+  const { setNodeRef } = useDroppable({
+    id: listId,
+    data: { listId }
+  });
 
-    return (
-        <div ref={setDroppableRef} className="list">
-            <h3>{title}</h3>
-            <div className="card-container">
-                {cards.map(card => (
-                    <DraggableCard key={card.id} card={card} listId={listId} />
-                ))}
-            </div>
-        </div>
-    );
+  function addCard() {
+    if (newCardText.trim() === '') return;
+
+    const newCard = { id: Date.now().toString(), text: newCardText };
+    cards.push(newCard);
+    setNewCardText('');
+  }
+
+  return (
+    <div ref={setNodeRef} className="list">
+      <h3>{title}</h3>
+      {cards.map((card) => (
+        <DraggableCard key={card.id} id={card.id} listId={listId} text={card.text} />
+      ))}
+      <div className="add-card">
+        <input
+          type="text"
+          value={newCardText}
+          onChange={(e) => setNewCardText(e.target.value)}
+          placeholder="Add a new card"
+        />
+        <button onClick={addCard}>Add Card</button>
+      </div>
+    </div>
+  );
 }
