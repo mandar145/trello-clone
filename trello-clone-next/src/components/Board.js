@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import List from "./List"; // Ensure List is imported correctly
 import { DndContext } from "@dnd-kit/core"; // Import DndContext from @dnd-kit/core
+import { v4 as uuidv4 } from "uuid"; // Import uuid for unique IDs
 
 export default function Board() {
   const [lists, setLists] = useState([
@@ -10,6 +11,37 @@ export default function Board() {
     { id: "2", title: "In Progress", cards: [] },
     { id: "3", title: "Done", cards: [] },
   ]);
+
+  // New state to handle new list title input
+  const [newListTitle, setNewListTitle] = useState("");
+
+  // Functions
+
+  // Function to add a new list
+  const handleAddList = () => {
+    if (newListTitle.trim() === "") return;
+
+    const newList = { id: uuidv4(), title: newListTitle, cards: [] };
+    setLists([...lists, newList]);
+    setNewListTitle("");
+  };
+
+  // Delete a specific card in a list
+  const handleDeleteCard = (listIndex, cardIndex) => {
+    setLists((prevLists) =>
+      prevLists.map((list, i) =>
+        i === listIndex
+          ? { ...list, cards: list.cards.filter((_, j) => j !== cardIndex) }
+          : list
+      )
+    );
+  };
+
+  // Delete a list
+  const handleDeleteList = (listIndex) => {
+    const updatedLists = lists.filter((_, index) => index !== listIndex);
+    setLists(updatedLists);
+  };
 
   const handleDragEnd = (event) => {
     const active = event.active;
@@ -31,7 +63,9 @@ export default function Board() {
     const list = lists.find((list) => list.id === listId);
     const cardIndex = list.cards.findIndex((card) => card.id === cardId);
     const [movedCard] = list.cards.splice(cardIndex, 1);
-    const targetIndex = list.cards.findIndex((card) => card.id === targetCardId);
+    const targetIndex = list.cards.findIndex(
+      (card) => card.id === targetCardId
+    );
     list.cards.splice(targetIndex, 0, movedCard);
     setLists([...lists]);
   };
@@ -49,14 +83,31 @@ export default function Board() {
     <DndContext onDragEnd={handleDragEnd}>
       <div className="board">
         <div className="list-container">
-          {lists.map((list) => (
+          {lists.map((list, index) => (
             <List
               key={list.id}
               title={list.title}
               listId={list.id}
+              listIndex={index} // Pass the index here
               cards={list.cards}
+              onDeleteCard={(cardIndex) => handleDeleteCard(index, cardIndex)} // Pass delete card handler
+              onDeleteList={() => handleDeleteList(index)}
             />
           ))}
+
+          {/* Add List Button as the last item */}
+          <div className="add-list-container">
+            <input
+              type="text"
+              className="form-control"
+              value={newListTitle}
+              onChange={(e) => setNewListTitle(e.target.value)}
+              placeholder="Add another list"
+            />
+            <button className="btn btn-dark" onClick={handleAddList}>
+              Add List
+            </button>
+          </div>
         </div>
       </div>
     </DndContext>

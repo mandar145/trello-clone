@@ -113,3 +113,43 @@ body {
   outline: 2px solid #5aac44; /* Green outline on focus */
   background-color: #50545c;
 }
+
+
+.delete-card, .delete-list {
+  background-color: #ff6b6b; /* Red color for delete buttons */
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+.delete-card:hover, .delete-list:hover {
+  background-color: #ff4c4c;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.delete-card {
+  background-color: #dc3545; /* Bootstrap's danger color */
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.delete-card:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
