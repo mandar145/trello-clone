@@ -21,18 +21,20 @@ export default function List({ title, listId, cards }) {
 
   return (
     <div ref={setNodeRef} className="list">
-      <h3>{title}</h3>
+      <h4>{title}</h4>
+      <hr></hr>
       {cards.map((card) => (
         <DraggableCard key={card.id} id={card.id} listId={listId} text={card.text} />
       ))}
       <div className="add-card">
         <input
-          type="text"
+          type="text" className='form-control'
           value={newCardText}
           onChange={(e) => setNewCardText(e.target.value)}
           placeholder="Add a new card"
         />
-        <button onClick={addCard}>Add Card</button>
+        <br/>
+        <button  className='btn btn-dark' onClick={addCard}>Add Card</button>
       </div>
     </div>
   );

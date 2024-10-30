@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto+Slab:wght@342&display=swap');
 
 html,
 body {
@@ -6,11 +7,11 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: #151b23;
-  font-family: Arial, Helvetica, sans-serif;
+  color: #ccc;
+  
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: "Raleway", sans-serif;
 }
 
 * {
@@ -19,30 +20,96 @@ body {
   margin: 0;
 }
 
-/* src/app/globals.css */
-
+/* Board container styling */
 .board {
   padding: 20px;
 }
 
+/* Flex container for lists */
 .list-container {
   display: flex;
   gap: 20px;
 }
 
+/* List styling */
 .list {
-  padding: 10px;
-  border: 1px solid red;
-  border-radius: 5px;
-  width: 200px;
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.15) 2px 4px 6px; /* Stronger shadow for depth */
+  background-color: #3a3f47; /* Darker grey background */
+  color: #ffffff;
+  border-radius: 8px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.list .add-card input { padding: 8px;border: solid 1px #ddd; }
-.list .add-card button { padding: 8px;margin:5px; }
+.list h3 {
+  font-size: 16px;
+  color: #e4e6eb;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Add card section styling */
+.list .add-card {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.list .add-card input {
+  max-height: 35px;
+  border: none;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 5px;
+  background-color: #40444b;
+  color: #e4e6eb;
+  flex-grow: 1;
+}
+
+.list .add-card input::placeholder {
+  color: #a6a9b3;
+}
+
+/* Add card button styling */
+.list .add-card button {
+  background-color: #5aac44;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.list .add-card button:hover {
+  background-color: #519839;
+}
+
+/* Card styling */
 .card {
-  padding: 10px;
-  margin-bottom: 5px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  background-color: #f8f8f8;
+  padding: 12px;
+  font-size: 14px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Slightly more prominent shadow */
+  color: #172b4d;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  background-color: #f4f5f7; /* Light grey hover effect */
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+/* Extra styling for input focus */
+.list .add-card input:focus {
+  outline: 2px solid #5aac44; /* Green outline on focus */
+  background-color: #50545c;
 }
