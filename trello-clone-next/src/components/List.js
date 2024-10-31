@@ -42,7 +42,7 @@ export default function List({
           className="delete-list btn btn-danger"
           onClick={() => onDeleteList(listId)} // Button to delete the entire list
         >
-          Delete List
+          <i className="fa-solid fa-x"></i>
         </button>
       </div>
       <hr />
@@ -53,13 +53,13 @@ export default function List({
           className="card-container"
           style={{ display: "flex", alignItems: "center" }}
         >
-          <DraggableCard id={card.id} listId={listId} text={card.text} />
+          <DraggableCard id={card.id} listId={listId} text={card.text}  />
           <button
             className="delete-card btn btn-danger"
             onClick={() => onDeleteCard(cardIndex)} // Trigger delete card with cardIndex only
             style={{ marginLeft: "8px" }}
           >
-            Delete Card
+            <i className="fas fa-trash-alt"></i> 
           </button>
         </div>
       ))}
@@ -74,7 +74,7 @@ export default function List({
         />
         <br />
         <button className="btn btn-dark" onClick={addCard}>
-          Add Card
+        <i className="fa-solid fa-plus"></i>
         </button>
       </div>
     </div>

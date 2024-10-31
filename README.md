@@ -22,3 +22,4 @@ React virsion 18 ( could have used 19 but it is in pre release and some dependen
 npm install @dnd-kit/core  (dnd-kit for drag and drop functionality in react and next)  
 npm install @dnd-kit/sortable (sorting top - bottom)
 npm install uuid (generates random unique ID and eliminates risk of duplicate id : uuidv4())
+npm install @fortawesome/fontawesome-free  ( for icons)

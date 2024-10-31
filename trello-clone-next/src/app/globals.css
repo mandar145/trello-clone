@@ -1,9 +1,13 @@
+/* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto+Slab:wght@342&display=swap');
+/* Fontawesome icon */
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
 
 html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  overflow-x: hidden; /* Prevent horizontal scrolling globally */
+  overflow-y: hidden; /* Enable vertical scrolling */
 }
 
 body {
@@ -23,11 +27,17 @@ body {
 /* Board container styling */
 .board {
   padding: 20px;
+  /* background-color: #151b23; */
+  color: #ffffff;
+  height: 100vh; /* Full height for the board */
+  overflow-x: auto; /* Allow horizontal scrolling */
+  overflow-y: hidden; /* Prevent vertical scroll in board */
+  white-space: nowrap; /* Ensure lists are displayed in a single line */
 }
 
 /* Flex container for lists */
 .list-container {
-  display: flex;
+  display: inline-flex; /* Inline flex to enable scrolling on overflow */
   gap: 20px;
 }
 
@@ -38,9 +48,8 @@ body {
   background-color: #3a3f47; /* Darker grey background */
   color: #ffffff;
   border-radius: 8px;
-  width: 250px;
-  display: flex;
-  flex-direction: column;
+  min-width: 250px;
+  display: inline-block; /* Inline-block so lists stay in a row */
   gap: 10px;
 }
 
@@ -92,18 +101,19 @@ body {
 
 /* Card styling */
 .card {
-  padding: 12px;
+  padding:5px;
   font-size: 14px;
   margin-bottom: 8px;
   border-radius: 8px;
-  background-color: #ffffff;
+  width:190px;
+  background-color: #40444b !important; /* Updated card color */
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Slightly more prominent shadow */
-  color: #172b4d;
+  color: #a6a9b3 !important; /* Light text color for readability */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
-  background-color: #f4f5f7; /* Light grey hover effect */
+  background-color: #50545c; /* Slightly lighter color on hover */
   transform: translateY(-2px);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
 }
@@ -116,7 +126,7 @@ body {
 
 
 .delete-card, .delete-list {
-  background-color: #ff6b6b; /* Red color for delete buttons */
+  
   color: #fff;
   border: none;
   padding: 4px 8px;

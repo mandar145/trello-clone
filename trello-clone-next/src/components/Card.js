@@ -4,7 +4,7 @@ import { Draggable } from '@dnd-kit/core'; // Ensure Draggable is imported corre
 export default function Card({ text, id, listId }) {
   return (
     <Draggable id={id} data={{ listId }}>
-      <div className="card">
+      <div className="card form-control">
         <p>{text}</p>
       </div>
     </Draggable>

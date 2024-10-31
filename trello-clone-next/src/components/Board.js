@@ -96,16 +96,28 @@ export default function Board() {
           ))}
 
           {/* Add List Button as the last item */}
-          <div className="add-list-container">
+          <div
+            className="add-list-container"
+            style={{
+              backgroundColor: "#f4f4f8", // Background color
+              padding: "10px", // Padding
+              borderRadius: "5px", // Rounded corners
+              display:"flex",
+              alignItems:"center",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)", // Shadow effect          
+              cursor: "pointer", // Pointer cursor on hover
+            }}
+          >
             <input
               type="text"
               className="form-control"
               value={newListTitle}
               onChange={(e) => setNewListTitle(e.target.value)}
-              placeholder="Add another list"
+              placeholder="Add List"
             />
+            <br />&nbsp;
             <button className="btn btn-dark" onClick={handleAddList}>
-              Add List
+            <i className="fa-regular fa-circle-check"></i>
             </button>
           </div>
         </div>

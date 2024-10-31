@@ -9,7 +9,7 @@ export default function navbar() {
         style={{ backgroundColor: "#000", color:"#fff" }}
       >
         <a className="navbar-brand" href="#">
-          <h4 style={{color:"#fff" }}>Task Manager</h4>
+        <h5 className="fs-3 font-monospace fw-light"  style={{ color:"#fff" }}>Task Manager</h5>
         </a>
       </nav>
     </div>
