@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import List from "./List"; // Ensure List is imported correctly
+
 import { DndContext } from "@dnd-kit/core"; // Import DndContext from @dnd-kit/core
 import { v4 as uuidv4 } from "uuid"; // Import uuid for unique IDs
 
@@ -82,6 +83,8 @@ export default function Board() {
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <div className="board">
+
+      <br></br>
         <div className="list-container">
           {lists.map((list, index) => (
             <List

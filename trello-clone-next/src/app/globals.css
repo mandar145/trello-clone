@@ -3,16 +3,14 @@
 /* Fontawesome icon */
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 
-
 html,
 body {
   overflow-x: hidden; /* Prevent horizontal scrolling globally */
-  overflow-y: hidden; /* Enable vertical scrolling */
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 
 body {
   color: #ccc;
-  
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: "Raleway", sans-serif;
@@ -26,19 +24,22 @@ body {
 
 /* Board container styling */
 .board {
-  padding: 20px;
-  /* background-color: #151b23; */
+  padding: 10px;
   color: #ffffff;
   height: 100vh; /* Full height for the board */
-  overflow-x: auto; /* Allow horizontal scrolling */
-  overflow-y: hidden; /* Prevent vertical scroll in board */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden; /* Prevent vertical scroll */
   white-space: nowrap; /* Ensure lists are displayed in a single line */
+  display: flex; /* Display flex to align items in row */
+  align-items: flex-start; /* Align lists at the start */
 }
 
 /* Flex container for lists */
 .list-container {
   display: inline-flex; /* Inline flex to enable scrolling on overflow */
   gap: 20px;
+  padding-left: 8px;
+  align-items: flex-start; /* Align lists and add button at top */
 }
 
 /* List styling */
@@ -101,11 +102,11 @@ body {
 
 /* Card styling */
 .card {
-  padding:5px;
+  padding: 5px;
   font-size: 14px;
   margin-bottom: 8px;
   border-radius: 8px;
-  width:190px;
+  width: 190px;
   background-color: #40444b !important; /* Updated card color */
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Slightly more prominent shadow */
   color: #a6a9b3 !important; /* Light text color for readability */
@@ -124,9 +125,8 @@ body {
   background-color: #50545c;
 }
 
-
-.delete-card, .delete-list {
-  
+.delete-card,
+.delete-list {
   color: #fff;
   border: none;
   padding: 4px 8px;
@@ -136,7 +136,8 @@ body {
   margin-left: 8px;
 }
 
-.delete-card:hover, .delete-list:hover {
+.delete-card:hover,
+.delete-list:hover {
   background-color: #ff4c4c;
 }
 
@@ -151,6 +152,7 @@ body {
   align-items: center;
   gap: 10px;
 }
+
 .delete-card {
   background-color: #dc3545; /* Bootstrap's danger color */
   border: none;
@@ -162,4 +164,26 @@ body {
 
 .delete-card:hover {
   background-color: #c82333; /* Darker red on hover */
+}
+
+/* Add new list button styling */
+.add-list-container {
+  padding: 15px;
+  background-color: #2e343e;
+  color: #ffffff;
+  border-radius: 8px;
+  min-width: 250px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  white-space: nowrap; /* Prevent button from shrinking */
+}
+
+.add-list-container:hover {
+  background-color: #3a3f47;
 }
