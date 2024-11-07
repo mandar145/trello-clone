@@ -1,7 +1,8 @@
 "use client"; // Necessary for Next.js client-side rendering
 
 import React, { useState } from "react";
-import List from "./List"; // Ensure List is imported correctly
+import List from "./List";
+import ActivitySimulator from "./ActivitySimulator";
 
 import { DndContext } from "@dnd-kit/core"; // Import DndContext from @dnd-kit/core
 import { v4 as uuidv4 } from "uuid"; // Import uuid for unique IDs
@@ -83,7 +84,7 @@ export default function Board() {
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <div className="board">
-
+      <ActivitySimulator lists={lists} setLists={setLists} />
       <br></br>
         <div className="list-container">
           {lists.map((list, index) => (
