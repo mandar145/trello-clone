@@ -23,3 +23,6 @@ npm install @dnd-kit/core  (dnd-kit for drag and drop functionality in react and
 npm install @dnd-kit/sortable (sorting top - bottom)
 npm install uuid (generates random unique ID and eliminates risk of duplicate id : uuidv4())
 npm install @fortawesome/fontawesome-free  ( for icons)
+npm install @angular/cdk (Angular Drag and Drop Functionalities)
+npm install bootstrap (for bootstrap css)
+

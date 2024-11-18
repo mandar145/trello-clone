@@ -1,1 +1,207 @@
-/* You can add global styles to this file, and also import other style files */
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto+Slab:wght@342&display=swap');
+/* Fontawesome icon */
+
+
+html,
+body {
+  overflow-x: hidden; /* Prevent horizontal scrolling globally */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+body {
+  color: #ccc;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: "Raleway", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* Board container styling */
+.board {
+  padding: 10px;
+  color: #ffffff;
+  height: 100vh; /* Full height for the board */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden; /* Prevent vertical scroll */
+  white-space: nowrap; /* Ensure lists are displayed in a single line */
+  display: flex; /* Display flex to align items in row */
+  align-items: flex-start; /* Align lists at the start */
+}
+
+/* Flex container for lists */
+.list-container {
+  display: inline-flex; /* Inline flex to enable scrolling on overflow */
+  gap: 20px;
+  padding-left: 8px;
+  align-items: flex-start; /* Align lists and add button at top */
+}
+
+/* List styling */
+.list {
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.15) 2px 4px 6px; /* Stronger shadow for depth */
+  background-color: #3a3f47; /* Darker grey background */
+  color: #ffffff;
+  border-radius: 8px;
+  min-width: 250px;
+  display: inline-block; /* Inline-block so lists stay in a row */
+  gap: 10px;
+}
+
+.list h3 {
+  font-size: 16px;
+  color: #e4e6eb;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Add card section styling */
+.list .add-card {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.list .add-card input {
+  max-height: 35px;
+  border: none;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 5px;
+  background-color: #40444b;
+  color: #e4e6eb;
+  flex-grow: 1;
+}
+
+.list .add-card input::placeholder {
+  color: #a6a9b3;
+}
+
+/* Add card button styling */
+.list .add-card button {
+  background-color: #5aac44;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.list .add-card button:hover {
+  background-color: #519839;
+}
+
+/* Card styling */
+.card {
+  padding: 5px;
+  font-size: 14px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  width: 190px;
+  background-color: #40444b !important; /* Updated card color */
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Slightly more prominent shadow */
+  color: #a6a9b3 !important; /* Light text color for readability */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  background-color: #50545c; /* Slightly lighter color on hover */
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+/* Extra styling for input focus */
+.list .add-card input:focus {
+  outline: 2px solid #5aac44; /* Green outline on focus */
+  background-color: #50545c;
+}
+
+.delete-card,
+.delete-list {
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+.delete-card:hover,
+.delete-list:hover {
+  background-color: #ff4c4c;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.delete-card {
+  background-color: #dc3545; /* Bootstrap's danger color */
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.delete-card:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+/* Add new list button styling */
+.add-list-container {
+  padding: 15px;
+  background-color: #2e343e;
+  color: #ffffff;
+  border-radius: 8px;
+  min-width: 250px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  white-space: nowrap; /* Prevent button from shrinking */
+}
+
+.add-list-container:hover {
+  background-color: #3a3f47;
+}
+.activity-controls {
+  margin-bottom: 16px;
+}
+
+.activity-controls button {
+  margin-right: 8px;
+  padding: 8px 12px;
+  background-color: #5aac44;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.activity-controls button:disabled {
+  background-color: #a9a9a9;
+  cursor: not-allowed;
+}
