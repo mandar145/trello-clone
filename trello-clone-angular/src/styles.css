@@ -5,7 +5,7 @@
 
 html,
 body {
-  overflow-x: hidden; /* Prevent horizontal scrolling globally */
+  overflow-x: auto; /* Prevent horizontal scrolling globally */
   overflow-y: auto; /* Enable vertical scrolling */
 }
 
@@ -28,7 +28,7 @@ body {
   color: #ffffff;
   height: 100vh; /* Full height for the board */
   overflow-x: auto; /* Enable horizontal scrolling */
-  overflow-y: hidden; /* Prevent vertical scroll */
+  overflow-y: auto; /* Prevent vertical scroll */
   white-space: nowrap; /* Ensure lists are displayed in a single line */
   display: flex; /* Display flex to align items in row */
   align-items: flex-start; /* Align lists at the start */
@@ -101,17 +101,29 @@ body {
 }
 
 /* Card styling */
+/* Card styling */
 .card {
   padding: 5px;
   font-size: 14px;
   margin-bottom: 8px;
   border-radius: 8px;
-  width: 190px;
+  width: 190px; /* Fixed width */
   background-color: #40444b !important; /* Updated card color */
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Slightly more prominent shadow */
   color: #a6a9b3 !important; /* Light text color for readability */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  /* Prevent text overflow */
+  word-wrap: break-word; /* Break long words */
+  overflow-wrap: break-word; /* For broader compatibility */
+  text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+  overflow: hidden; /* Hide overflow */
+  white-space: normal; /* Allow wrapping */
+  min-height: 100px; /* Optional: Limit card height for very long text */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
 
 .card:hover {
   background-color: #50545c; /* Slightly lighter color on hover */

@@ -1,1 +1,29 @@
-<p>list</p>
+<div class="list">
+  <div class="list-header">
+    <h3>{{ list.title }}</h3>
+    <button (click)="emitRemoveList()" class="btn btn-danger">
+      <fa-icon [icon]="faTrash"></fa-icon>
+    </button>
+  </div>
+
+  <div class="card-container" *ngFor="let card of list.cards">
+    <div class="card">
+      <span>{{ card.text }}</span>
+      <button class="btn btn-danger btn-sm" (click)="deleteCard(card.id)">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="add-card">
+    <input
+      type="text"
+      [(ngModel)]="newCardText"
+      placeholder="Add a new card"
+      class="form-control"
+    />
+    <button class="btn btn-success btn-sm" (click)="addCard()">
+      <fa-icon [icon]="faPlus"></fa-icon>
+    </button>
+  </div>
+</div>

@@ -1,22 +1,20 @@
 <app-header></app-header>
 <div class="board">
-    <!-- Add List Section -->
-    <div class="add-list">
-      <input 
-        type="text" 
-        [(ngModel)]="newListTitle" 
-        placeholder="Enter list title" 
-        class="form-control"
-      />
-      <button (click)="addList()" class="btn btn-primary">Add List</button>
-    </div>
-  
-    <!-- Display Lists -->
-    <div class="list-container">
-      <div class="list" *ngFor="let list of lists" style="border:solid 1px red;display:flex;justify-content: space-between;">
-        <h4>{{ list.title }}</h4>
-        <button (click)="removeList(list.id)" class="btn btn-danger"><fa-icon [icon]="faTrash"></fa-icon></button>
-      </div>
-    </div>
+  <div class="add-list">
+    <input
+      type="text"
+      [(ngModel)]="newListTitle"
+      placeholder="Enter list title"
+      class="form-control"
+    />
+    <button (click)="addList()" class="btn btn-primary">Add List</button>
   </div>
-  
+
+  <div class="list-container">
+    <app-list
+      *ngFor="let list of lists"
+      [list]="list"
+      (removeList)="removeList($event)"
+    ></app-list>
+  </div>
+</div>
