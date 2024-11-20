@@ -2,11 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto+Slab:wght@342&display=swap');
 /* Fontawesome icon */
 
-
 html,
 body {
-  overflow-x: auto; /* Prevent horizontal scrolling globally */
-  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
 body {
@@ -26,31 +25,32 @@ body {
 .board {
   padding: 10px;
   color: #ffffff;
-  height: 100vh; /* Full height for the board */
-  overflow-x: auto; /* Enable horizontal scrolling */
-  overflow-y: auto; /* Prevent vertical scroll */
-  white-space: nowrap; /* Ensure lists are displayed in a single line */
-  display: flex; /* Display flex to align items in row */
-  align-items: flex-start; /* Align lists at the start */
+  height: 100vh;
+  overflow-x: auto;
+  overflow-y: auto;
+  white-space: nowrap;
+  display: flex;
+  align-items: flex-start;
 }
 
 /* Flex container for lists */
 .list-container {
-  display: inline-flex; /* Inline flex to enable scrolling on overflow */
+  display: inline-flex;
   gap: 20px;
   padding-left: 8px;
-  align-items: flex-start; /* Align lists and add button at top */
+  align-items: flex-start;
 }
 
 /* List styling */
 .list {
   padding: 15px;
-  box-shadow: rgba(0, 0, 0, 0.15) 2px 4px 6px; /* Stronger shadow for depth */
-  background-color: #3a3f47; /* Darker grey background */
+  box-shadow: rgba(0, 0, 0, 0.15) 2px 4px 6px;
+  background-color: #3a3f47;
   color: #ffffff;
   border-radius: 8px;
-  min-width: 250px;
-  display: inline-block; /* Inline-block so lists stay in a row */
+  width: 250px;
+  display: inline-block;
+  word-wrap: break-word;
   gap: 10px;
 }
 
@@ -84,7 +84,6 @@ body {
   color: #a6a9b3;
 }
 
-/* Add card button styling */
 .list .add-card button {
   background-color: #5aac44;
   color: white;
@@ -101,39 +100,56 @@ body {
 }
 
 /* Card styling */
-/* Card styling */
 .card {
-  padding: 5px;
+  padding: 8px;
   font-size: 14px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   border-radius: 8px;
-  width: 190px; /* Fixed width */
-  background-color: #40444b !important; /* Updated card color */
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Slightly more prominent shadow */
-  color: #a6a9b3 !important; /* Light text color for readability */
+  width: 100%;
+  background-color: #40444b !important;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  color: #a6a9b3 !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  /* Prevent text overflow */
-  word-wrap: break-word; /* Break long words */
-  overflow-wrap: break-word; /* For broader compatibility */
-  text-overflow: ellipsis; /* Add ellipsis for overflowing text */
-  overflow: hidden; /* Hide overflow */
-  white-space: normal; /* Allow wrapping */
-  min-height: 100px; /* Optional: Limit card height for very long text */
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  white-space: normal; /* Ensure text wraps properly */
 }
 
+.card span {
+  flex-grow: 1; /* Text takes available space */
+  margin-right: 10px;
+  word-wrap: break-word; /* Ensures text breaks at words */
+  overflow-wrap: break-word;
+}
 
 .card:hover {
-  background-color: #50545c; /* Slightly lighter color on hover */
+  background-color: #50545c;
   transform: translateY(-2px);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Extra styling for input focus */
+.card button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.2s ease;
+}
+
+.card button:hover {
+  background-color: #c82333;
+}
+
 .list .add-card input:focus {
-  outline: 2px solid #5aac44; /* Green outline on focus */
+  outline: 2px solid #5aac44;
   background-color: #50545c;
 }
 
@@ -166,7 +182,7 @@ body {
 }
 
 .delete-card {
-  background-color: #dc3545; /* Bootstrap's danger color */
+  background-color: #dc3545;
   border: none;
   color: white;
   padding: 4px 8px;
@@ -175,10 +191,9 @@ body {
 }
 
 .delete-card:hover {
-  background-color: #c82333; /* Darker red on hover */
+  background-color: #c82333;
 }
 
-/* Add new list button styling */
 .add-list-container {
   padding: 15px;
   background-color: #2e343e;
@@ -193,12 +208,13 @@ body {
   font-size: 16px;
   font-weight: bold;
   transition: background-color 0.3s;
-  white-space: nowrap; /* Prevent button from shrinking */
+  white-space: nowrap;
 }
 
 .add-list-container:hover {
   background-color: #3a3f47;
 }
+
 .activity-controls {
   margin-bottom: 16px;
 }

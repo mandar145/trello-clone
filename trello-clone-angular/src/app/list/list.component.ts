@@ -1,44 +1,46 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { v4 as uuidv4 } from 'uuid';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { v4 as uuidv4 } from 'uuid';
+import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [FormsModule, FontAwesomeModule, CommonModule],
+  imports: [FormsModule, CommonModule, FontAwesomeModule],
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  styleUrls: ['./list.component.css'],
 })
 export class ListComponent {
-  @Input() list: any; // List data passed from the parent
-  @Output() removeList = new EventEmitter<string>(); // Emit list ID to remove
-  newCardText: string = ''; // Input for new card text
+  @Input() list: any; // Accept list data from parent
+  @Output() removeList = new EventEmitter<string>(); // Notify parent to remove list
 
-  // Add a card
+  newCardText: string = '';
+
+  // Add a new card to the list
   addCard() {
     if (this.newCardText.trim() !== '') {
-      this.list.cards.push({
+      const newCard = {
         id: uuidv4(),
-        text: this.newCardText
-      });
-      this.newCardText = '';
+        text: this.newCardText.trim(),
+      };
+      this.list.cards.push(newCard);
+      this.newCardText = ''; // Clear input field
     }
   }
 
-  // Remove a card
+  // Remove a card from the list
   deleteCard(cardId: string) {
     this.list.cards = this.list.cards.filter((card: any) => card.id !== cardId);
   }
 
-  // Emit event to remove list
+  // Notify parent to remove this list
   emitRemoveList() {
     this.removeList.emit(this.list.id);
   }
 
   // FontAwesome icons
-  faPlus = faPlus;
   faTrash = faTrash;
+  faPlus = faPlus;
 }
