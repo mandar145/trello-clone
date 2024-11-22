@@ -19,7 +19,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 export class BoardComponent {
   lists: { id: string; title: string; cards: { id: string; text: string }[], newCardText: string }[] = [];
   newListTitle: string = '';
-  
+  activityInterval: any = null;
 
   faTrash = faTrash;
   faPlus = faPlus;
@@ -60,6 +60,56 @@ export class BoardComponent {
       list.cards = list.cards.filter(card => card.id !== cardId);
     }
   }
+
+
+
+  // Start automated activity for performance testing
+  startActivity() {
+    if (this.activityInterval) return;
+
+    this.activityInterval = setInterval(() => {
+      const randomAction = Math.floor(Math.random() * 3);
+
+      if (randomAction === 0) {
+        // Randomly create a new list
+        this.lists.push({
+          id: uuidv4(),
+          title: `List ${Math.random().toString(36).substring(2, 7)}`,
+          cards: [],
+          newCardText: '',
+        });
+      } else if (randomAction === 1 && this.lists.length > 0) {
+        // Randomly add a card to an existing list
+        const randomList = this.lists[Math.floor(Math.random() * this.lists.length)];
+        const randomCardText = `Card ${Math.random().toString(36).substring(2, 7)}`;
+        randomList.cards.push({
+          id: uuidv4(),
+          text: randomCardText,
+        });
+      } else if (randomAction === 2 && this.lists.length > 1) {
+        // Perform random drag-and-drop operation
+        this.randomDragDrop();
+      }
+    }, 1000);
+  }
+  
+    stopActivity() {
+      if (this.activityInterval) {
+        clearInterval(this.activityInterval);
+        this.activityInterval = null;
+      }
+    }
+
+    randomDragDrop() {
+      if (this.lists.length > 1) {
+        const sourceList = this.lists[Math.floor(Math.random() * this.lists.length)];
+        const targetList = this.lists[Math.floor(Math.random() * this.lists.length)];
+        if (sourceList.cards.length > 0) {
+          const card = sourceList.cards.pop();
+          targetList.cards.push(card!);
+        }
+      }
+    }
 
   // Handle list or card drop event
   drop(event: CdkDragDrop<any[]>) {
