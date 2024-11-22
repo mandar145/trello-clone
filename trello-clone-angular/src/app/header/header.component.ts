@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -9,14 +9,15 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  @Output() startActivity = new EventEmitter<void>();
+  @Output() stopActivity = new EventEmitter<void>();
+
   onStartActivity() {
-    console.log('Activity started.');
-    // Logic to start the activity
+    this.startActivity.emit();
   }
 
   onStopActivity() {
-    console.log('Activity stopped.');
-    // Logic to stop the activity
+    this.stopActivity.emit();
   }
 
 }

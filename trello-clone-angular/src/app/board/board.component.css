@@ -1,0 +1,12 @@
+.cdk-drag-preview {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+  }
+  
+  .cdk-drag-placeholder {
+    opacity: 0.3;
+  }
+  
+  .cdk-drop-list-dragging .card {
+    transition: transform 0.2s ease;
+  }
+  
