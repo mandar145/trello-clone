@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "public": "out",
+    "site": "trello-nextjs-444",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
