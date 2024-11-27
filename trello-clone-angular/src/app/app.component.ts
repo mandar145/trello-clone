@@ -3,13 +3,15 @@ import { RouterOutlet } from '@angular/router';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-
+import { initializeApp } from 'firebase/app';
+import { environment } from '../environments/environment';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, DragDropModule, FontAwesomeModule],
+  imports: [CommonModule,RouterOutlet, DragDropModule, FontAwesomeModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -19,4 +21,7 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 export class AppComponent {
   title = 'trello-clone-angular';
   faCoffee = faCoffee;
+  constructor(){
+    initializeApp(environment.firebaseConfig);
+  }
 }
