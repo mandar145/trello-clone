@@ -28,7 +28,7 @@ body {
   color: #ffffff;
   height: 100vh; /* Full height for the board */
   overflow-x: auto; /* Enable horizontal scrolling */
-  overflow-y: hidden; /* Prevent vertical scroll */
+  /* overflow-y: hidden;  */
   white-space: nowrap; /* Ensure lists are displayed in a single line */
   display: flex; /* Display flex to align items in row */
   align-items: flex-start; /* Align lists at the start */

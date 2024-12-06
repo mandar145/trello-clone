@@ -8,12 +8,7 @@ import { DndContext } from "@dnd-kit/core"; // Import DndContext from @dnd-kit/c
 import { v4 as uuidv4 } from "uuid"; // Import uuid for unique IDs
 
 export default function Board() {
-  const [lists, setLists] = useState([
-    { id: "1", title: "To Do", cards: [] },
-    { id: "2", title: "In Progress", cards: [] },
-    { id: "3", title: "Done", cards: [] },
-  ]);
-
+  const [lists, setLists] = useState([]); 
   // New state to handle new list title input
   const [newListTitle, setNewListTitle] = useState("");
 
@@ -27,7 +22,13 @@ export default function Board() {
     setLists([...lists, newList]);
     setNewListTitle("");
   };
-
+  
+  // Delete a list
+  const handleDeleteList = (listIndex) => {
+    const updatedLists = lists.filter((_, index) => index !== listIndex);
+    setLists(updatedLists);
+  };
+  
   // Delete a specific card in a list
   const handleDeleteCard = (listIndex, cardIndex) => {
     setLists((prevLists) =>
@@ -39,11 +40,6 @@ export default function Board() {
     );
   };
 
-  // Delete a list
-  const handleDeleteList = (listIndex) => {
-    const updatedLists = lists.filter((_, index) => index !== listIndex);
-    setLists(updatedLists);
-  };
 
   const handleDragEnd = (event) => {
     const active = event.active;
@@ -84,8 +80,8 @@ export default function Board() {
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <div className="board">
-      <ActivitySimulator lists={lists} setLists={setLists} />
-      <br></br>
+        <ActivitySimulator lists={lists} setLists={setLists} />
+        <br></br>
         <div className="list-container">
           {lists.map((list, index) => (
             <List
@@ -106,9 +102,9 @@ export default function Board() {
               backgroundColor: "#f4f4f8", // Background color
               padding: "10px", // Padding
               borderRadius: "5px", // Rounded corners
-              display:"flex",
-              alignItems:"center",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)", // Shadow effect          
+              display: "flex",
+              alignItems: "center",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)", // Shadow effect
               cursor: "pointer", // Pointer cursor on hover
             }}
           >
@@ -119,9 +115,10 @@ export default function Board() {
               onChange={(e) => setNewListTitle(e.target.value)}
               placeholder="Add List"
             />
-            <br />&nbsp;
+            <br />
+            &nbsp;
             <button className="btn btn-dark" onClick={handleAddList}>
-            <i className="fa-regular fa-circle-check"></i>
+              <i className="fa-regular fa-circle-check"></i>
             </button>
           </div>
         </div>
