@@ -1,13 +1,12 @@
-"use client"; // Required for Next.js client-side rendering
+"use client";
 
 import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid"; // For generating unique IDs
+import { v4 as uuidv4 } from "uuid";
 
 export default function ActivitySimulator({ lists, setLists }) {
   const [isActive, setIsActive] = useState(false);
   const [intervalIds, setIntervalIds] = useState([]);
 
-  // Function to add a random card to a random list
   const addRandomCard = () => {
     if (lists.length === 0) return;
 
@@ -23,7 +22,6 @@ export default function ActivitySimulator({ lists, setLists }) {
     );
   };
 
-  // Function to add a new random list
   const addRandomList = () => {
     const newList = {
       id: uuidv4(),
@@ -34,17 +32,17 @@ export default function ActivitySimulator({ lists, setLists }) {
     setLists((prevLists) => [...prevLists, newList]);
   };
 
-  // Start activity logic
   const startActivity = () => {
     if (isActive) return;
     setIsActive(true);
 
-    // High-speed card addition: 5 cards every 50ms
+    intervalIds.forEach((id) => clearInterval(id));
+    setIntervalIds([]);
+
     const cardInterval = setInterval(() => {
       for (let i = 0; i < 5; i++) addRandomCard();
     }, 50);
 
-    // High-speed list addition: 1 list every 500ms
     const listInterval = setInterval(() => {
       addRandomList();
     }, 500);
@@ -52,11 +50,10 @@ export default function ActivitySimulator({ lists, setLists }) {
     setIntervalIds([cardInterval, listInterval]);
   };
 
-  // Stop activity logic
   const stopActivity = () => {
     setIsActive(false);
     intervalIds.forEach((id) => clearInterval(id)); // Clear all intervals
-    setIntervalIds([]);
+    setIntervalIds([]); // Reset intervals
   };
 
   return (
@@ -66,14 +63,14 @@ export default function ActivitySimulator({ lists, setLists }) {
         className="btn btn-success"
         disabled={isActive}
       >
-        Start Activity
+        <i className="fas fa-play"></i> Start Activity
       </button>
       <button
         onClick={stopActivity}
         className="btn btn-danger"
         disabled={!isActive}
       >
-        Stop Activity
+        <i className="fas fa-stop"></i> Stop Activity
       </button>
     </div>
   );

@@ -1,7 +1,7 @@
 {
   "hosting": {
     "public": "out",
-    "site": "trello-nextjs-444",
+    "site": "next-js-145",
     "ignore": [
       "firebase.json",
       "**/.*",

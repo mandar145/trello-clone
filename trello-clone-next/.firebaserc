@@ -1,5 +1,7 @@
 {
   "projects": {
     "default": "trello-angular-2e7ad"
-  }
+  },
+  "targets": {},
+  "etags": {}
 }

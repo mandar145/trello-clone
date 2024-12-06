@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid"; // Use UUID for consistent ID generation
 export default function List({
   title,
   listId,
-  cards,
+  cards = [], // Default cards to an empty array
   onDeleteCard,
   onDeleteList,
 }) {
@@ -28,7 +28,9 @@ export default function List({
     if (newCardText.trim() === "") return;
 
     const newCard = { id: uuidv4(), text: newCardText }; // Generate a unique ID for each new card
-    cards.push(newCard); // Add the card to the list
+    if (cards) {
+      cards.push(newCard); // Add the card to the list
+    }
     setNewCardText(""); // Clear the input
   }
 
@@ -47,22 +49,24 @@ export default function List({
       </div>
       <hr />
       {/* Render each card in the list */}
-      {cards.map((card, cardIndex) => (
-        <div
-          key={card.id}
-          className="card-container"
-          style={{ display: "flex", alignItems: "center" }}
-        >
-          <DraggableCard id={card.id} listId={listId} text={card.text}  />
-          <button
-            className="delete-card btn btn-danger"
-            onClick={() => onDeleteCard(cardIndex)} // Trigger delete card with cardIndex only
-            style={{ marginLeft: "8px" }}
+      {cards
+        .filter((card) => card && card.id) // Validate each card object
+        .map((card, cardIndex) => (
+          <div
+            key={card.id}
+            className="card-container"
+            style={{ display: "flex", alignItems: "center" }}
           >
-            <i className="fas fa-trash-alt"></i> 
-          </button>
-        </div>
-      ))}
+            <DraggableCard id={card.id} listId={listId} text={card.text} />
+            <button
+              className="delete-card btn btn-danger"
+              onClick={() => onDeleteCard(cardIndex)} // Trigger delete card with cardIndex only
+              style={{ marginLeft: "8px" }}
+            >
+              <i className="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        ))}
       {/* Input and button to add new cards */}
       <div className="add-card">
         <input
@@ -74,7 +78,7 @@ export default function List({
         />
         <br />
         <button className="btn btn-dark" onClick={addCard}>
-        <i className="fa-solid fa-plus"></i>
+          <i className="fa-solid fa-plus"></i>
         </button>
       </div>
     </div>
