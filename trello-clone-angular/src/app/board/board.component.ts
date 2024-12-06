@@ -62,13 +62,16 @@ export class BoardComponent {
   }
 
 
+// Start automated activity for performance testing
+startActivity() {
+  if (this.activityInterval) return;
 
-  // Start automated activity for performance testing
-  startActivity() {
-    if (this.activityInterval) return;
+  let batchSize = 50; // Number of operations per interval
+  let intervalTime = 100; // Time in milliseconds for the interval
 
-    this.activityInterval = setInterval(() => {
-      const randomAction = Math.floor(Math.random() * 3);
+  this.activityInterval = setInterval(() => {
+    for (let i = 0; i < batchSize; i++) {
+      const randomAction = Math.floor(Math.random() * 2);
 
       if (randomAction === 0) {
         // Randomly create a new list
@@ -81,17 +84,16 @@ export class BoardComponent {
       } else if (randomAction === 1 && this.lists.length > 0) {
         // Randomly add a card to an existing list
         const randomList = this.lists[Math.floor(Math.random() * this.lists.length)];
-        const randomCardText = `Card ${Math.random().toString(36).substring(2, 7)}`;
         randomList.cards.push({
           id: uuidv4(),
-          text: randomCardText,
+          text: `Card ${Math.random().toString(36).substring(2, 7)}`,
         });
-      } else if (randomAction === 2 && this.lists.length > 1) {
-        // Perform random drag-and-drop operation
-        this.randomDragDrop();
       }
-    }, 1000);
-  }
+    }
+  }, intervalTime);
+}
+
+
   
     stopActivity() {
       if (this.activityInterval) {
@@ -104,12 +106,14 @@ export class BoardComponent {
       if (this.lists.length > 1) {
         const sourceList = this.lists[Math.floor(Math.random() * this.lists.length)];
         const targetList = this.lists[Math.floor(Math.random() * this.lists.length)];
-        if (sourceList.cards.length > 0) {
+        if (sourceList.cards.length > 0 && sourceList !== targetList) {
+          // Move the last card from source to target
           const card = sourceList.cards.pop();
-          targetList.cards.push(card!);
+          if (card) targetList.cards.push(card);
         }
       }
     }
+
 
   // Handle list or card drop event
   drop(event: CdkDragDrop<any[]>) {
