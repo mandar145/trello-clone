@@ -23,6 +23,18 @@ export default function Board() {
     setLists(updatedLists);
   };
 
+  const handleDeleteCard = (listId, cardIndex) => {
+    setLists((prevLists) =>
+      prevLists.map((list) => {
+        if (list.id === listId) {
+          const updatedCards = list.cards.filter((_, index) => index !== cardIndex);
+          return { ...list, cards: updatedCards };
+        }
+        return list;
+      })
+    );
+  };
+
   const handleDragEnd = (event) => {
     const { active, over } = event;
 
@@ -79,6 +91,7 @@ export default function Board() {
               listIndex={index}
               cards={list.cards || []} // Ensure cards is always an array
               onDeleteList={() => handleDeleteList(index)}
+              onDeleteCard={(cardIndex) => handleDeleteCard(list.id, cardIndex)} // Pass delete card logic
             />
           ))}
           <div className="add-list-container">
