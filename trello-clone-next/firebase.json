@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "nextjs-a1771",
     "public": "out",
     "ignore": [
       "firebase.json",

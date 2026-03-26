@@ -1,52 +1,138 @@
-<app-header (startActivity)="startActivity()" (stopActivity)="stopActivity()"></app-header>
-<div class="board">
-  <div class="add-list">
-    <input
-      type="text"
-      [(ngModel)]="newListTitle"
-      placeholder="Enter list title"
-      class="form-control"
-    />
-    <button (click)="addList()" class="btn btn-primary">Add List</button>
-  </div>
+<app-header
+  [isActivityRunning]="isActivityRunning"
+  [opsCount]="opsCount"
+  (startActivity)="startActivity()"
+  (stopActivity)="stopActivity()">
+</app-header>
 
+<div class="board">
   <div cdkDropListGroup class="list-container">
+
+    <!-- ── Lists ────────────────────────────────────────────────── -->
     <div
-      *ngFor="let list of lists"
+      *ngFor="let list of lists; trackBy: trackByListId"
       cdkDropList
       [cdkDropListData]="list.cards"
       (cdkDropListDropped)="drop($event)"
       class="list"
     >
+      <!-- List header -->
       <div class="list-header">
-        <h3>{{ list.title }}</h3>
-        <button (click)="removeList(list.id)" class="btn btn-danger">
-          <fa-icon [icon]="faTrash"></fa-icon>
-        </button>
+        <ng-container *ngIf="editingListId === list.id; else listTitleDisplay">
+          <input
+            class="list-title-input"
+            [(ngModel)]="editingListTitle"
+            (keyup.enter)="confirmEditList()"
+            (keyup.escape)="cancelEditList()"
+          />
+        </ng-container>
+        <ng-template #listTitleDisplay>
+          <h3 class="list-title" (dblclick)="startEditList(list)" title="Double-click to rename">
+            {{ list.title }}
+          </h3>
+        </ng-template>
+
+        <div class="list-header-actions">
+          <ng-container *ngIf="editingListId === list.id; else defaultListActions">
+            <button class="icon-btn" title="Save" (click)="confirmEditList()">
+              <fa-icon [icon]="faCheck"></fa-icon>
+            </button>
+            <button class="icon-btn" title="Cancel" (click)="cancelEditList()">
+              <fa-icon [icon]="faXmark"></fa-icon>
+            </button>
+          </ng-container>
+          <ng-template #defaultListActions>
+            <button class="icon-btn" title="Rename list" (click)="startEditList(list)">
+              <fa-icon [icon]="faPen"></fa-icon>
+            </button>
+            <button class="icon-btn icon-btn--danger" title="Delete list" (click)="removeList(list.id)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </ng-template>
+        </div>
       </div>
 
+      <!-- Cards -->
       <div
-        *ngFor="let card of list.cards"
+        *ngFor="let card of list.cards; trackBy: trackByCardId"
         cdkDrag
+        [cdkDragDisabled]="editingCardId === card.id"
         class="card"
       >
-        <span class="card-text">{{ card.text }}</span>
-        <button (click)="removeCard(list.id, card.id)" class="btn btn-danger btn-sm">
-          <fa-icon [icon]="faTrash"></fa-icon>
-        </button>
+        <!-- Card: edit mode -->
+        <ng-container *ngIf="editingCardId === card.id; else cardDisplay">
+          <textarea
+            class="card-edit-input"
+            [(ngModel)]="editingCardText"
+            (keyup.escape)="cancelEditCard()"
+            rows="3"
+          ></textarea>
+          <div class="card-edit-actions">
+            <button class="btn-save" (click)="confirmEditCard(list.id)">
+              <fa-icon [icon]="faCheck"></fa-icon> Save
+            </button>
+            <button class="btn-cancel" (click)="cancelEditCard()">
+              <fa-icon [icon]="faXmark"></fa-icon>
+            </button>
+          </div>
+        </ng-container>
+
+        <!-- Card: display mode -->
+        <ng-template #cardDisplay>
+          <div class="card-display-row">
+            <span class="card-text">{{ card.text }}</span>
+            <div class="card-actions">
+              <button class="icon-btn icon-btn--sm" title="Edit card" (click)="startEditCard(card)">
+                <fa-icon [icon]="faPen"></fa-icon>
+              </button>
+              <button class="icon-btn icon-btn--sm icon-btn--danger" title="Delete card" (click)="removeCard(list.id, card.id)">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </ng-template>
       </div>
 
+      <!-- Add card -->
       <div class="add-card">
         <input
           type="text"
           [(ngModel)]="list.newCardText"
-          placeholder="Add a new card"
-          class="form-control"
+          placeholder="Add a card…"
+          class="add-card-input"
+          (keyup.enter)="addCard(list.id)"
         />
-        <button class="btn btn-success btn-sm" (click)="addCard(list.id)">
+        <button class="btn-add-card" (click)="addCard(list.id)" title="Add card">
           <fa-icon [icon]="faPlus"></fa-icon>
         </button>
       </div>
     </div>
+
+    <!-- ── Add a list panel ──────────────────────────────────────── -->
+    <div class="add-list-panel">
+      <button *ngIf="!isAddingList" class="add-list-btn" (click)="openAddList()">
+        <fa-icon [icon]="faPlus"></fa-icon>
+        Add another list
+      </button>
+
+      <div *ngIf="isAddingList" class="add-list-form">
+        <input
+          type="text"
+          [(ngModel)]="newListTitle"
+          placeholder="Enter list title…"
+          class="add-list-input"
+          (keyup.enter)="addList()"
+          (keyup.escape)="cancelAddList()"
+          autofocus
+        />
+        <div class="add-list-form-actions">
+          <button class="btn-confirm-list" (click)="addList()">Add list</button>
+          <button class="btn-cancel-list" (click)="cancelAddList()">
+            <fa-icon [icon]="faXmark"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

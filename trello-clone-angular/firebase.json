@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "trello-angular-2e7ad",
     "public": "dist",
     "ignore": [
       "firebase.json",

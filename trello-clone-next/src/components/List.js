@@ -1,84 +1,117 @@
-import React, { useState, useEffect } from "react";
+"use client";
+
+import React, { useState } from "react";
 import DraggableCard from "./DraggableCard";
 import { useDroppable } from "@dnd-kit/core";
-import { v4 as uuidv4 } from "uuid"; // Use UUID for consistent ID generation
 
 export default function List({
   title,
   listId,
-  cards = [], // Default cards to an empty array
-  onDeleteCard,
+  cards = [],
   onDeleteList,
+  onDeleteCard,
+  onAddCard,
+  onEditCard,
+  onEditListTitle,
 }) {
   const [newCardText, setNewCardText] = useState("");
-  const [isMounted, setIsMounted] = useState(false);
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [editTitleValue, setEditTitleValue] = useState(title);
 
-  useEffect(() => {
-    setIsMounted(true); // Ensure component renders after client mounts
-  }, []);
+  const { setNodeRef } = useDroppable({ id: listId, data: { listId } });
 
-  // Initialize the droppable area for the list
-  const { setNodeRef } = useDroppable({
-    id: listId,
-    data: { listId },
-  });
+  const handleAddCard = () => {
+    if (!newCardText.trim()) return;
+    onAddCard(listId, newCardText.trim());
+    setNewCardText("");
+  };
 
-  // Function to add a new card
-  function addCard() {
-    if (newCardText.trim() === "") return;
+  const handleCardKeyDown = (e) => {
+    if (e.key === "Enter") handleAddCard();
+  };
 
-    const newCard = { id: uuidv4(), text: newCardText }; // Generate a unique ID for each new card
-    if (cards) {
-      cards.push(newCard); // Add the card to the list
+  const handleSaveTitle = () => {
+    if (editTitleValue.trim()) {
+      onEditListTitle(listId, editTitleValue.trim());
     }
-    setNewCardText(""); // Clear the input
-  }
+    setIsEditingTitle(false);
+  };
 
-  if (!isMounted) return null; // Render only after mounting on the client to avoid hydration issues
+  const handleTitleKeyDown = (e) => {
+    if (e.key === "Enter") handleSaveTitle();
+    if (e.key === "Escape") {
+      setEditTitleValue(title);
+      setIsEditingTitle(false);
+    }
+  };
 
   return (
     <div ref={setNodeRef} className="list">
+      {/* List header */}
       <div className="list-header">
-        <h4>{title}</h4>
-        <button
-          className="delete-list btn btn-danger"
-          onClick={() => onDeleteList(listId)} // Button to delete the entire list
-        >
-          <i className="fa-solid fa-x"></i>
-        </button>
+        {isEditingTitle ? (
+          <input
+            className="list-title-input"
+            value={editTitleValue}
+            onChange={(e) => setEditTitleValue(e.target.value)}
+            onKeyDown={handleTitleKeyDown}
+            autoFocus
+          />
+        ) : (
+          <h3 className="list-title" onDoubleClick={() => { setIsEditingTitle(true); setEditTitleValue(title); }}>
+            {title}
+          </h3>
+        )}
+
+        <div className="list-header-actions">
+          {isEditingTitle ? (
+            <>
+              <button className="icon-btn" title="Save" onClick={handleSaveTitle}>
+                <i className="fas fa-check"></i>
+              </button>
+              <button className="icon-btn" title="Cancel" onClick={() => { setEditTitleValue(title); setIsEditingTitle(false); }}>
+                <i className="fas fa-xmark"></i>
+              </button>
+            </>
+          ) : (
+            <>
+              <button className="icon-btn" title="Rename list" onClick={() => { setIsEditingTitle(true); setEditTitleValue(title); }}>
+                <i className="fas fa-pen"></i>
+              </button>
+              <button className="icon-btn icon-btn--danger" title="Delete list" onClick={() => onDeleteList(listId)}>
+                <i className="fas fa-trash"></i>
+              </button>
+            </>
+          )}
+        </div>
       </div>
-      <hr />
-      {/* Render each card in the list */}
+
+      {/* Cards */}
       {cards
-        .filter((card) => card && card.id) // Validate each card object
-        .map((card, cardIndex) => (
-          <div
+        .filter((card) => card && card.id)
+        .map((card) => (
+          <DraggableCard
             key={card.id}
-            className="card-container"
-            style={{ display: "flex", alignItems: "center" }}
-          >
-            <DraggableCard id={card.id} listId={listId} text={card.text} />
-            <button
-              className="delete-card btn btn-danger"
-              onClick={() => onDeleteCard(cardIndex)} // Trigger delete card with cardIndex only
-              style={{ marginLeft: "8px" }}
-            >
-              <i className="fas fa-trash-alt"></i>
-            </button>
-          </div>
+            id={card.id}
+            listId={listId}
+            text={card.text}
+            onDelete={(cardId) => onDeleteCard(listId, cardId)}
+            onEdit={(cardId, newText) => onEditCard(listId, cardId, newText)}
+          />
         ))}
-      {/* Input and button to add new cards */}
+
+      {/* Add card */}
       <div className="add-card">
         <input
           type="text"
-          className="form-control"
+          className="add-card-input"
           value={newCardText}
           onChange={(e) => setNewCardText(e.target.value)}
-          placeholder="Add a new card"
+          onKeyDown={handleCardKeyDown}
+          placeholder="Add a card…"
         />
-        <br />
-        <button className="btn btn-dark" onClick={addCard}>
-          <i className="fa-solid fa-plus"></i>
+        <button className="btn-add-card" onClick={handleAddCard} title="Add card">
+          <i className="fas fa-plus"></i>
         </button>
       </div>
     </div>

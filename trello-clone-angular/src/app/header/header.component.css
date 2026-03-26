@@ -1,0 +1,116 @@
+.app-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 52px;
+  background: linear-gradient(90deg, #c62828 0%, #b71c1c 100%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-shrink: 0;
+  box-shadow: 0 2px 12px rgba(198, 40, 40, 0.5);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.4px;
+  user-select: none;
+}
+
+.nav-brand-mark {
+  font-size: 22px;
+  color: #ffcdd2;
+  line-height: 1;
+}
+
+.framework-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  margin-left: 4px;
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ── Activity running indicator ──────────────────────────────────── */
+
+.activity-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.07);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.pulse-dot {
+  display: flex;
+  align-items: center;
+  color: #ff5555;
+  font-size: 8px;
+  animation: pulse-scale 1s ease-in-out infinite;
+}
+
+@keyframes pulse-scale {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%       { transform: scale(1.6); opacity: 0.5; }
+}
+
+.ops-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: #d0d7de;
+}
+
+/* ── Nav buttons ─────────────────────────────────────────────────── */
+
+.nav-btn {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+  letter-spacing: 0.2px;
+}
+
+.nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.nav-btn--success {
+  background-color: #4caf50;
+  color: #ffffff;
+}
+
+.nav-btn--success:not(:disabled):hover {
+  background-color: #43a047;
+}
+
+.nav-btn--danger {
+  background-color: #e53935;
+  color: #ffffff;
+}
+
+.nav-btn--danger:not(:disabled):hover {
+  background-color: #c62828;
+}

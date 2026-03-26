@@ -1,7 +1,34 @@
-<nav class="navbar bg-dark border-bottom border-body" style="background-color: #e3f2fd;">
-  <h1>Task Manager</h1>
-  <div class="header">
-    <button class="btn btn-success" (click)="onStartActivity()">Start Activity</button>
-    <button class="btn btn-danger" (click)="onStopActivity()">Stop Activity</button>
-  </div>  
+<nav class="app-nav">
+  <div class="nav-brand">
+    <span class="nav-brand-mark">&#9783;</span>
+    Task Board
+    <span class="framework-badge">Angular 18</span>
+  </div>
+
+  <div class="nav-controls">
+    <div class="activity-status" *ngIf="isActivityRunning">
+      <span class="pulse-dot">
+        <fa-icon [icon]="faCircle"></fa-icon>
+      </span>
+      <span class="ops-count">{{ opsCount | number }} ops</span>
+    </div>
+
+    <button
+      class="nav-btn nav-btn--success"
+      [disabled]="isActivityRunning"
+      (click)="onStartActivity()"
+      title="Start activity simulator"
+    >
+      Start Activity
+    </button>
+
+    <button
+      class="nav-btn nav-btn--danger"
+      [disabled]="!isActivityRunning"
+      (click)="onStopActivity()"
+      title="Stop activity simulator"
+    >
+      Stop Activity
+    </button>
+  </div>
 </nav>

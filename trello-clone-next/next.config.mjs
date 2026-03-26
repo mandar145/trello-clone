@@ -1,8 +1,10 @@
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  output: 'export',
+};
 
 export default nextConfig;
-
 
 
 
@@ -11,10 +13,10 @@ export default nextConfig;
 //FOR DEPLOYING ON FIREBASE USE BELOW UPDATES
  
 
-// const nextConfig = {
-//      output: 'export',
+//  const nextConfig = {
+//       output: 'export',
     
-//    };
+//     };
   
-//    export default nextConfig;
+//     export default nextConfig;
 

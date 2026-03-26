@@ -1,17 +1,44 @@
-"use client"; // Necessary for Next.js client-side rendering
+"use client";
+
 import React from "react";
 
-export default function navbar() {
+export default function Navbar({ isActivityRunning, opsCount, onStartActivity, onStopActivity }) {
   return (
-    <div>
-      <nav
-        className="navbar navbar-light"
-        style={{ backgroundColor: "#000", color:"#fff" }}
-      >
-        <a className="navbar-brand" href="#">
-        <h5 className="fs-3 font-monospace fw-light"  style={{ color:"#fff" }}>Task Manager</h5>
-        </a>
-      </nav>
-    </div>
+    <nav className="app-nav">
+      <span className="nav-brand">
+        <span className="nav-brand-mark">&#9783;</span>
+        Task Board
+        <span className="framework-badge">Next.js 15</span>
+      </span>
+
+      <div className="nav-controls">
+        {isActivityRunning && (
+          <div className="activity-status">
+            <span className="pulse-dot">
+              <i className="fas fa-circle" style={{ fontSize: "8px" }}></i>
+            </span>
+            <span className="ops-count">{opsCount.toLocaleString()} ops</span>
+          </div>
+        )}
+
+        <button
+          className="nav-btn nav-btn--success"
+          disabled={isActivityRunning}
+          onClick={onStartActivity}
+          title="Start activity simulator"
+        >
+          Start Activity
+        </button>
+
+        <button
+          className="nav-btn nav-btn--danger"
+          disabled={!isActivityRunning}
+          onClick={onStopActivity}
+          title="Stop activity simulator"
+        >
+          Stop Activity
+        </button>
+      </div>
+    </nav>
   );
 }
