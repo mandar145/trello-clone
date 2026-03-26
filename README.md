@@ -1,28 +1,134 @@
-Trello Clone Application
+# Trello Clone — Framework Performance Comparison
 
-The aim of this project is to compare the performance of two popular frontend technologies Next js and Angular, by building a Trello-like task management application in each. This comparison focuses on DOM handling efficiency, memory management, and user experience in a realistic single-page app.
+A Masters dissertation project comparing the performance of **Angular 18** and **Next.js 15 (React 18)** by building equivalent Trello-like task management applications in each framework.
 
-Project Structure
-The repository contains two folders:
-trello-clone-next: The Trello clone built in Next Js.
-trello-clone-angular: The Trello clone built in Angular
+The comparison focuses on **DOM handling efficiency**, **memory management**, and **user experience** under load using an automated activity simulator.
 
-Functionalities
-Both applications include:
+---
 
-Board Management: Create, rename, and delete boards.
-List Management: Add, edit, and delete lists within boards.
-Card Management: Add, edit, delete, and reorder cards within lists.
-Drag-and-Drop: Move cards between lists smoothly.
-Local Data Persistence: Stores data locally to simulate real application usage.
-These features allow for a thorough comparison of React and Angular in handling frequent updates and dynamic interactions.
+## Repository Structure
 
-Packages:
-React virsion 18 ( could have used 19 but it is in pre release and some dependencies were not able to install on it)
-npm install @dnd-kit/core  (dnd-kit for drag and drop functionality in react and next)  
-npm install @dnd-kit/sortable (sorting top - bottom)
-npm install uuid (generates random unique ID and eliminates risk of duplicate id : uuidv4())
-npm install @fortawesome/fontawesome-free  ( for icons)
-npm install @angular/cdk (Angular Drag and Drop Functionalities)
-npm install bootstrap (for bootstrap css)
+```
+trello-clone/
+├── trello-clone-angular/   # Angular 18 implementation
+└── trello-clone-next/      # Next.js 15 / React 18 implementation
+```
 
+---
+
+## Live Deployments
+
+| App | URL |
+|-----|-----|
+| Angular | https://trello-angular-2e7ad.web.app |
+| Next.js | https://nextjs-a1771.web.app |
+
+---
+
+## Features
+
+Both applications are functionally equivalent and include:
+
+- **Board Management** — Create, rename, and delete boards
+- **List Management** — Add, edit, and delete lists within boards
+- **Card Management** — Add, edit, delete, and reorder cards within lists
+- **Drag and Drop** — Move cards between lists smoothly
+- **Local Data Persistence** — Stores data locally to simulate real application usage
+
+---
+
+## Tech Stack
+
+| | Angular App | Next.js App |
+|---|---|---|
+| Framework | Angular 18 | Next.js 15 |
+| Language | TypeScript | JavaScript |
+| Drag & Drop | Angular CDK | @dnd-kit |
+| Styling | Bootstrap 5 | Bootstrap 5 |
+| Icons | FontAwesome (Angular) | FontAwesome (Free) |
+| IDs | Angular built-in | uuid (v4) |
+| Deployment | Firebase Hosting | Firebase Hosting |
+
+---
+
+## Getting Started
+
+### Angular App
+
+```bash
+cd trello-clone-angular
+npm install
+npm start
+```
+
+Runs on `http://localhost:4200`
+
+### Next.js App
+
+```bash
+cd trello-clone-next
+npm install
+npm run dev
+```
+
+Runs on `http://localhost:3000`
+
+---
+
+## Building for Production
+
+### Angular
+
+```bash
+cd trello-clone-angular
+npm run build
+```
+
+Output: `dist/`
+
+### Next.js
+
+```bash
+cd trello-clone-next
+npm run build
+```
+
+Output: `out/` (static export)
+
+---
+
+## Deploying to Firebase
+
+Both apps are configured for Firebase Hosting.
+
+```bash
+# Angular
+cd trello-clone-angular
+npm run build
+firebase deploy
+
+# Next.js
+cd trello-clone-next
+npm run build
+firebase deploy
+```
+
+---
+
+## Key Dependencies
+
+### Angular App
+| Package | Purpose |
+|---------|---------|
+| `@angular/cdk` | Drag and drop functionality |
+| `@angular/fire` | Firebase integration |
+| `@fortawesome/angular-fontawesome` | Icons |
+| `bootstrap` | UI styling |
+
+### Next.js App
+| Package | Purpose |
+|---------|---------|
+| `@dnd-kit/core` | Drag and drop functionality |
+| `@dnd-kit/sortable` | Sortable list support |
+| `uuid` | Unique ID generation |
+| `bootstrap` | UI styling |
